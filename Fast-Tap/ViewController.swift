@@ -9,12 +9,110 @@
 import UIKit
 
 class ViewController: UIViewController {
+    //MARK:- Model
+    var gameModel = Game()
+    
+    //MARK:- Timers
+    var gameTimer : Timer?
+    var gameTimeInSeconds = 0
+    var readyCountdownTimer : Timer?
+    var readyCountdownInSeconds = 0
 
+    //MARK:- Outlets
+    @IBOutlet weak var currentScoreLabel: UILabel!
+    @IBOutlet weak var gameButton: UIButton!
+    @IBOutlet weak var startGameButton: UIButton!
+    @IBOutlet weak var highScoreLabel: UILabel!
+    @IBOutlet weak var readyMessageLabel: UILabel!
+    @IBOutlet weak var secondsLeftLabel: UILabel!
+    
+    //MARK:- Actions
+    @IBAction func startGame(_ sender: Any) {
+        if(gameModel.isPlaying == false){
+            //Prepare UI
+            startGameButton.isEnabled = false
+            currentScoreLabel.text = String(gameModel.currentScore)
+            readyMessageLabel.text = "Ready..."
+            
+            //Begin Countdown to prepare User to tap
+            readyCountdownTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(runReadyCountdownTimer), userInfo: nil, repeats: true)
+        }
+    }
+
+    @IBAction func incrementScore(_ sender: Any) {
+        if(gameModel.isPlaying == true){
+            gameModel.setCurrentScore()
+            currentScoreLabel.text = String(gameModel.currentScore)
+        }
+    }
+    
+    //MARK:- Functions
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        highScoreLabel.text = String(gameModel.highScore)
+        gameButton.isEnabled = false
     }
-
-
+    
+    @objc func runReadyCountdownTimer(){
+        if(readyCountdownInSeconds > 0 && readyCountdownInSeconds < 4){
+            if(readyCountdownInSeconds == 1){
+                readyMessageLabel.text = "3..."
+            }
+            if(readyCountdownInSeconds == 2){
+                readyMessageLabel.text = "2..."
+            }
+            if(readyCountdownInSeconds == 3){
+                readyMessageLabel.text = "1..."
+            }
+        }
+        if(readyCountdownInSeconds == 4){
+            readyMessageLabel.text = "Go!"
+            secondsLeftLabel.text = "5 Seconds Left"
+            //Clean up countdown timer
+            readyCountdownTimer?.invalidate()
+            readyCountdownInSeconds = 0
+            
+            //Ready Game For Start
+            gameButton.isEnabled = true
+            gameModel.startGame()
+            gameTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(runGameTimer), userInfo: nil, repeats: true)
+        }
+        
+        readyCountdownInSeconds += 1
+    }
+    
+    @objc func runGameTimer(){
+        gameTimeInSeconds += 1
+        
+        switch(gameTimeInSeconds){
+            case 1 :
+                secondsLeftLabel.text = "4 Seconds Left"
+            case 2 :
+                secondsLeftLabel.text = "3 Seconds Left"
+            case 3 :
+                secondsLeftLabel.text = "2 Seconds Left"
+            case 4 :
+                secondsLeftLabel.text = "1 Second Left"
+            case 5 :
+                secondsLeftLabel.text = ""
+            default :
+                secondsLeftLabel.text = "5 Seconds Left"
+        }
+        
+        if gameTimeInSeconds == gameModel.timeLimit {
+            //Clean up game timer
+            gameTimer?.invalidate()
+            gameModel.endGame()
+            gameTimeInSeconds = 0
+            
+            //Clean up UI
+            highScoreLabel.text = String(gameModel.highScore)
+            readyMessageLabel.text = gameModel.userMessage
+            gameButton.isEnabled = false
+            startGameButton.isEnabled = true
+            secondsLeftLabel.text = ""
+        }
+    }
 }
 
