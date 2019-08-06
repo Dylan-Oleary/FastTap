@@ -8,6 +8,29 @@
 
 import UIKit
 
+extension UILabel {
+    func textDropShadow() {
+        self.layer.masksToBounds = false
+        self.layer.shadowRadius = 2.0
+        self.layer.shadowOpacity = 0.5
+        self.layer.shadowOffset = CGSize(width: 1, height: 2)
+    }
+}
+
+extension UIButton {
+    func buttonStyles() {
+        self.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.25).cgColor
+        self.layer.shadowOffset = CGSize(width: 0, height: 3)
+        self.layer.shadowOpacity = 1.0
+        self.layer.shadowRadius = 15.0
+        self.layer.masksToBounds = false
+        self.layer.borderWidth = 2
+        self.layer.borderColor = UIColor.white.cgColor
+        self.layer.cornerRadius = 5
+        self.titleLabel?.textDropShadow()
+    }
+}
+
 class ViewController: UIViewController {
     //MARK:- Model
     var gameModel = Game()
@@ -25,6 +48,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var highScoreLabel: UILabel!
     @IBOutlet weak var readyMessageLabel: UILabel!
     @IBOutlet weak var secondsLeftLabel: UILabel!
+    @IBOutlet weak var highScoreTitleLabel: UILabel!
     
     //MARK:- Actions
     @IBAction func startGame(_ sender: Any) {
@@ -49,6 +73,23 @@ class ViewController: UIViewController {
     //MARK:- Functions
     override func viewDidLoad() {
         super.viewDidLoad()
+        //Set BG Image
+        let backgroundImage = UIImageView(frame: UIScreen.main.bounds)
+        backgroundImage.image = UIImage(named: "background.png")
+        backgroundImage.contentMode = UIView.ContentMode.scaleAspectFill
+        self.view.insertSubview((backgroundImage), at: 0)
+        
+        //Style Labels
+        currentScoreLabel.textDropShadow()
+        highScoreLabel.textDropShadow()
+        readyMessageLabel.textDropShadow()
+        secondsLeftLabel.textDropShadow()
+        highScoreTitleLabel.textDropShadow()
+        
+        //Style Buttons
+        gameButton.buttonStyles()
+        startGameButton.buttonStyles()
+        
         // Do any additional setup after loading the view.
         highScoreLabel.text = String(gameModel.highScore)
         gameButton.isEnabled = false
@@ -97,7 +138,7 @@ class ViewController: UIViewController {
             case 5 :
                 secondsLeftLabel.text = ""
             default :
-                secondsLeftLabel.text = "5 Seconds Left"
+                secondsLeftLabel.text = ""
         }
         
         if gameTimeInSeconds == gameModel.timeLimit {

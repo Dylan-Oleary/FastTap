@@ -10,7 +10,6 @@ import Foundation
 
 class Game {
     var currentScore = 0
-    var previousScore = 0
     var highScore = 0
     var isPlaying: Bool?
     let timeLimit = 5
