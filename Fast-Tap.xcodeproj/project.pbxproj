@@ -16,7 +16,7 @@
 		40A1569B22F8B36800213C2D /* Fast_TapTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A1569A22F8B36800213C2D /* Fast_TapTests.swift */; };
 		40A156A622F8B36800213C2D /* Fast_TapUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A156A522F8B36800213C2D /* Fast_TapUITests.swift */; };
 		40A156B422F8B40E00213C2D /* GameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A156B322F8B40E00213C2D /* GameModel.swift */; };
-		40CF54E922F8F9AD004558DC /* SuperMario256.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 40CF54E822F8F91F004558DC /* SuperMario256.ttf */; };
+		7147CAFD22F9F3020064290A /* SuperMario256.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7147CAFC22F9F3020064290A /* SuperMario256.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,7 +52,7 @@
 		40A156A522F8B36800213C2D /* Fast_TapUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fast_TapUITests.swift; sourceTree = "<group>"; };
 		40A156A722F8B36800213C2D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		40A156B322F8B40E00213C2D /* GameModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameModel.swift; sourceTree = "<group>"; };
-		40CF54E822F8F91F004558DC /* SuperMario256.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = SuperMario256.ttf; path = ../../../../../Downloads/SuperMario256.ttf; sourceTree = "<group>"; };
+		7147CAFC22F9F3020064290A /* SuperMario256.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = SuperMario256.ttf; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,7 +137,7 @@
 		40CF54E722F8F897004558DC /* fonts */ = {
 			isa = PBXGroup;
 			children = (
-				40CF54E822F8F91F004558DC /* SuperMario256.ttf */,
+				7147CAFC22F9F3020064290A /* SuperMario256.ttf */,
 			);
 			path = fonts;
 			sourceTree = "<group>";
@@ -247,7 +247,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				40A1569022F8B36700213C2D /* LaunchScreen.storyboard in Resources */,
-				40CF54E922F8F9AD004558DC /* SuperMario256.ttf in Resources */,
+				7147CAFD22F9F3020064290A /* SuperMario256.ttf in Resources */,
 				40A1568D22F8B36700213C2D /* Assets.xcassets in Resources */,
 				40A1568B22F8B36700213C2D /* Main.storyboard in Resources */,
 			);
